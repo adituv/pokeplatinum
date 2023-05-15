@@ -1,0 +1,6 @@
+#ifndef POKEPLATINUM_PLITEMDATA_DECL_H
+#define POKEPLATINUM_PLITEMDATA_DECL_H
+
+typedef struct PlItemData_t PlItemData;
+
+#endif // POKEPLATINUM_PLITEMDATA_DECL_H

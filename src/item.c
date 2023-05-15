@@ -5,15 +5,16 @@
 #include "struct_decls/struct_02023790_decl.h"
 
 #include "struct_defs/struct_0207CDEC.h"
-#include "struct_defs/struct_0207D3B0.h"
+#include "struct_defs/plitemdata.h"
 
-#include "struct_defs/struct_0207D0B0.h"
+#include "struct_defs/plitemdataextra.h"
 
 #include "narc.h"
 #include "unk_0200AC5C.h"
 #include "heap.h"
 #include "item.h"
 
+#include "constants/item.h"
 #include "constants/moves.h"
 
 typedef struct {
@@ -23,7 +24,7 @@ typedef struct {
     u16 gen3ID;
 } UnkStruct_020F0CC4;
 
-static s32 sub_0207D0B0(UnkStruct_0207D0B0 * param0, u16 param1);
+static s32 Item_GetAttributeFromExtraStruct(PlItemDataExtra * param0, u16 param1);
 
 const UnkStruct_020F0CC4 sItemNarcIDs[] = {
 	{ 0x0, 0x2C3, 0x2C4, 0x0 },
@@ -749,7 +750,7 @@ u16 sub_0207CE78 (u16 param0, u16 param1)
     return 0;
 }
 
-u16 sub_0207CF10 (u16 param0)
+u16 Item_GetItemIDFromGen3ID (u16 param0)
 {
     u16 v0;
 
@@ -808,152 +809,152 @@ void Item_GetDescriptionIntoString (UnkStruct_02023790 * dest, u16 itemID, u16 h
 
 s32 Item_GetAttribute (u16 itemID, u16 attributeID, u32 heapID)
 {
-    UnkStruct_0207D3B0 * v0;
+    PlItemData * v0;
     s32 v1;
 
-    v0 = (UnkStruct_0207D3B0 *)Item_LoadDataOrGFX(itemID, 0, heapID);
+    v0 = (PlItemData *)Item_LoadDataOrGFX(itemID, 0, heapID);
     v1 = Item_GetAttributeFromStruct(v0, attributeID);
     Heap_FreeToHeapExplicit(heapID, v0);
 
     return v1;
 }
 
-s32 Item_GetAttributeFromStruct (UnkStruct_0207D3B0 * itemData, u16 attributeID)
+s32 Item_GetAttributeFromStruct (PlItemData * itemData, u16 attributeID)
 {
     switch (attributeID) {
-    case 0:
-        return (s32)itemData->unk_00;
-    case 1:
-        return (s32)itemData->unk_02;
-    case 2:
+    case ITEM_DATA_PRICE:
+        return (s32)itemData->price;
+    case ITEM_DATA_HOLDEFFECT_ID:
+        return (s32)itemData->holdEffectId;
+    case ITEM_DATA_2:
         return (s32)itemData->unk_03;
-    case 3:
-        return (s32)itemData->unk_08_5;
-    case 4:
+    case ITEM_DATA_ISKEYITEM:
+        return (s32)itemData->isKeyItem;
+    case ITEM_DATA_4:
         return (s32)itemData->unk_08_6;
-    case 5:
-        return (s32)itemData->unk_08_7;
-    case 6:
+    case ITEM_DATA_POCKET:
+        return (s32)itemData->bagPocket;
+    case ITEM_DATA_6:
         return (s32)itemData->unk_0A;
-    case 7:
+    case ITEM_DATA_7:
         return (s32)itemData->unk_0B;
-    case 8:
+    case ITEM_DATA_8:
         return (s32)itemData->unk_04;
-    case 9:
+    case ITEM_DATA_9:
         return (s32)itemData->unk_05;
-    case 10:
-        return (s32)itemData->unk_06;
-    case 11:
-        return (s32)itemData->unk_07;
-    case 12:
-        return (s32)itemData->unk_08_0;
-    case 13:
-        return (s32)itemData->unk_08_11;
-    case 14:
-        return (s32)itemData->unk_0C;
+    case ITEM_DATA_FLING_POWER:
+        return (s32)itemData->flingPower;
+    case ITEM_DATA_NATURAL_GIFT_POWER:
+        return (s32)itemData->naturalGiftPower;
+    case ITEM_DATA_NATURAL_GIFT_TYPE:
+        return (s32)itemData->naturalGiftType;
+    case ITEM_DATA_BATTLE_POCKET:
+        return (s32)itemData->inBattleBagPocket;
+    case ITEM_DATA_HASEXTRADATA:
+        return (s32)itemData->hasExtraItemData;
     default:
-        switch (itemData->unk_0C) {
+        switch (itemData->hasExtraItemData) {
         case 0:
-            return (s32)itemData->unk_0E[0];
+            return (s32)itemData->unk_0E;
         case 1:
-            return sub_0207D0B0((UnkStruct_0207D0B0 *)itemData->unk_0E, attributeID);
+            return Item_GetAttributeFromExtraStruct(&itemData->extra, attributeID);
         }
     }
 
     return 0;
 }
 
-static s32 sub_0207D0B0 (UnkStruct_0207D0B0 * param0, u16 param1)
+static s32 Item_GetAttributeFromExtraStruct (PlItemDataExtra * param0, u16 param1)
 {
     switch (param1) {
-    case 15:
-        return (s32)param0->unk_00_0;
-    case 16:
-        return (s32)param0->unk_00_1;
-    case 17:
-        return (s32)param0->unk_00_2;
-    case 18:
-        return (s32)param0->unk_00_3;
-    case 19:
-        return (s32)param0->unk_00_4;
-    case 20:
-        return (s32)param0->unk_00_5;
-    case 21:
-        return (s32)param0->unk_00_6;
-    case 22:
-        return (s32)param0->unk_00_7;
-    case 23:
-        return (s32)param0->unk_01_0;
-    case 24:
-        return (s32)param0->unk_01_1;
-    case 25:
-        return (s32)param0->unk_01_2;
-    case 26:
-        return (s32)param0->unk_01_3;
-    case 27:
-        return (s32)param0->unk_01_4;
-    case 28:
-        return (s32)param0->unk_02_0;
-    case 29:
-        return (s32)param0->unk_02_4;
-    case 30:
-        return (s32)param0->unk_03_0;
-    case 31:
-        return (s32)param0->unk_03_4;
-    case 32:
-        return (s32)param0->unk_04_0;
-    case 33:
-        return (s32)param0->unk_04_4;
-    case 34:
-        return (s32)param0->unk_04_6;
-    case 35:
-        return (s32)param0->unk_04_7;
-    case 36:
-        return (s32)param0->unk_05_0;
-    case 37:
-        return (s32)param0->unk_05_1;
-    case 38:
-        return (s32)param0->unk_05_2;
-    case 39:
-        return (s32)param0->unk_05_3;
-    case 40:
-        return (s32)param0->unk_05_4;
-    case 41:
-        return (s32)param0->unk_05_5;
-    case 42:
-        return (s32)param0->unk_05_6;
-    case 43:
-        return (s32)param0->unk_05_7;
-    case 44:
-        return (s32)param0->unk_06_0;
-    case 45:
-        return (s32)param0->unk_06_1;
-    case 46:
-        return (s32)param0->unk_06_2;
-    case 47:
-        return (s32)param0->unk_06_3;
-    case 48:
-        return (s32)param0->unk_07;
-    case 49:
-        return (s32)param0->unk_08;
-    case 50:
-        return (s32)param0->unk_09;
-    case 51:
-        return (s32)param0->unk_0A;
-    case 52:
-        return (s32)param0->unk_0B;
-    case 53:
-        return (s32)param0->unk_0C;
-    case 54:
-        return (s32)param0->unk_0D;
-    case 55:
-        return (s32)param0->unk_0E;
-    case 56:
-        return (s32)param0->unk_0F;
-    case 57:
-        return (s32)param0->unk_10;
-    case 58:
-        return (s32)param0->unk_11;
+    case ITEM_DATA_CURES_SLEEP:
+        return (s32)param0->curesSleep;
+    case ITEM_DATA_CURES_POISON:
+        return (s32)param0->curesPoison;
+    case ITEM_DATA_CURES_BURN:
+        return (s32)param0->curesBurn;
+    case ITEM_DATA_CURES_FREEZE:
+        return (s32)param0->curesFreeze;
+    case ITEM_DATA_CURSE_PARALYSIS:
+        return (s32)param0->curesParalysis;
+    case ITEM_DATA_CURES_CONFUSION:
+        return (s32)param0->curesConfusion;
+    case ITEM_DATA_CURES_INFATUATION:
+        return (s32)param0->curesInfatuation;
+    case ITEM_DATA_HAS_GUARDSPEC_EFFECT:
+        return (s32)param0->hasGuardSpecEffect;
+    case ITEM_DATA_HAS_REVIVE_EFFECT:
+        return (s32)param0->hasReviveEffect;
+    case ITEM_DATA_HAS_SACREDASH_EFFECT:
+        return (s32)param0->hasSacredAshEffect;
+    case ITEM_DATA_HAS_RARECANDY_EFFECT:
+        return (s32)param0->hasRareCandyEffect;
+    case ITEM_DATA_HAS_EVOLUTION_EFFECT:
+        return (s32)param0->hasEvolutionEffect;
+    case ITEM_DATA_HAS_XATTACK_EFFECT:
+        return (s32)param0->hasXAttackEffect;
+    case ITEM_DATA_HAS_XDEFEND_EFFECT:
+        return (s32)param0->hasXDefendEffect;
+    case ITEM_DATA_HAS_XSPECIAL_EFFECT:
+        return (s32)param0->hasXSpecialEffect;
+    case ITEM_DATA_HAS_XSPDEF_EFFECT:
+        return (s32)param0->hasXSpDefEffect;
+    case ITEM_DATA_HAS_XSPEED_EFFECT:
+        return (s32)param0->hasXSpeedEffect;
+    case ITEM_DATA_HAS_XACCURACY_EFFECT:
+        return (s32)param0->hasXAccuracyEffect;
+    case ITEM_DATA_HAS_DIREHIT_EFFECT:
+        return (s32)param0->hasDireHitEffect;
+    case ITEM_DATA_HAS_PPUP_EFFECT:
+        return (s32)param0->hasPpUpEffect;
+    case ITEM_DATA_HAS_PPMAX_EFFECT:
+        return (s32)param0->hasPpMaxEffect;
+    case ITEM_DATA_RESTORES_PP_SINGLE:
+        return (s32)param0->restoresPpSingleMove;
+    case ITEM_DATA_RESTORES_PP_ALL:
+        return (s32)param0->restoresPpAllMoves;
+    case ITEM_DATA_RESTORES_HP:
+        return (s32)param0->restoresHp;
+    case ITEM_DATA_AFFECTS_HP_EVS:
+        return (s32)param0->affectsHpEvs;
+    case ITEM_DATA_AFFECTS_ATK_EVS:
+        return (s32)param0->affectsAtkEvs;
+    case ITEM_DATA_AFFECTS_DEF_EVS:
+        return (s32)param0->affectsDefEvs;
+    case ITEM_DATA_AFFECTS_SPE_EVS:
+        return (s32)param0->affectsSpeedEvs;
+    case ITEM_DATA_AFFECTS_SPA_EVS:
+        return (s32)param0->affectsSpAEvs;
+    case ITEM_DATA_AFFECTS_SPD_EVS:
+        return (s32)param0->affectsSpDEvs;
+    case ITEM_DATA_AFFECTS_FRIENDSHIP_LOW:
+        return (s32)param0->affectsFriendshipLow;
+    case ITEM_DATA_AFFECTS_FRIENDSHIP_MID:
+        return (s32)param0->affectsFriendshipMid;
+    case ITEM_DATA_AFFECTS_FRIENDSHIP_HIGH:
+        return (s32)param0->affectsFriendshipHigh;
+    case ITEM_DATA_DELTA_HP_EV:
+        return (s32)param0->hpEvChange;
+    case ITEM_DATA_DELTA_ATK_EV:
+        return (s32)param0->atkEvChange;
+    case ITEM_DATA_DELTA_DEF_EV:
+        return (s32)param0->defEvChange;
+    case ITEM_DATA_DELTA_SPE_EV:
+        return (s32)param0->speedEvChange;
+    case ITEM_DATA_DELTA_SPA_EV:
+        return (s32)param0->spAEvChange;
+    case ITEM_DATA_DELTA_SPD_EV:
+        return (s32)param0->spDEvChange;
+    case ITEM_DATA_AMT_HP_RESTORED:
+        return (s32)param0->hpRestored;
+    case ITEM_DATA_AMT_PP_RESTORED:
+        return (s32)param0->ppRestored;
+    case ITEM_DATA_DELTA_FRIENDSHIP_LOW:
+        return (s32)param0->friendshipChangeLow;
+    case ITEM_DATA_DELTA_FRIENDSHIP_MID:
+        return (s32)param0->friendshipChangeMid;
+    case ITEM_DATA_DELTA_FRIENDSHIP_HIGH:
+        return (s32)param0->friendshipChangeHigh;
     }
 
     return 0;
@@ -1004,12 +1005,12 @@ u8 Item_IsMail (u16 itemID)
     return FALSE;
 }
 
-u8 sub_0207D2F0 (u16 param0)
+u8 Item_GetMailIndexFromItemID (u16 itemID)
 {
     u32 i;
 
     for (i = 0; i < 12; i++) {
-        if (sMailItemIDs[i] == param0) {
+        if (sMailItemIDs[i] == itemID) {
             return (u8)i;
         }
     }
@@ -1017,13 +1018,13 @@ u8 sub_0207D2F0 (u16 param0)
     return 0;
 }
 
-u16 sub_0207D310 (u8 param0)
+u16 Item_GetItemIDFromMailIndex (u8 index)
 {
-    if (param0 >= 12) {
+    if (index >= 12) {
         return 0;
     }
 
-    return sMailItemIDs[param0];
+    return sMailItemIDs[index];
 }
 
 u8 Item_IsBerry (u16 itemID)
@@ -1039,22 +1040,22 @@ u8 Item_IsBerry (u16 itemID)
     return FALSE;
 }
 
-u8 sub_0207D344 (u16 param0)
+u8 Item_GetBerryIndexFromItemID (u16 itemID)
 {
-    if (param0 < 149) {
+    if (itemID < 149) {
         return 0xff;
     }
 
-    return param0 - 149;
+    return itemID - 149;
 }
 
-u16 sub_0207D354 (u8 param0)
+u16 Item_GetItemIDFromBerryIndex (u8 index)
 {
-	if (param0 >= 64) {
+	if (index >= 64) {
         return 0xffff;
     }
 
-    return sBerryItemIDs[param0];
+    return sBerryItemIDs[index];
 }
 
 u8 Item_IsHerbalMedicine (u16 itemID)
@@ -1072,12 +1073,12 @@ void * sub_0207D388 (int param0)
     return NARC_AllocAndReadFromMemberByIndexPair(15, 0, param0, 0, 36 * v0);
 }
 
-UnkStruct_0207D3B0 * sub_0207D3B0 (UnkStruct_0207D3B0 * param0, u16 param1)
+PlItemData * sub_0207D3B0 (PlItemData * param0, u16 param1)
 {
     u8 * v0;
 
     v0 = (u8 *)param0;
     v0 += param1 * 36;
 
-    return (UnkStruct_0207D3B0 *)v0;
+    return (PlItemData *)v0;
 }

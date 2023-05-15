@@ -30,6 +30,8 @@
 #include "unk_020923C0.h"
 #include "overlay005/ov5_021E622C.h"
 
+#include "constants/item.h"
+
 BOOL sub_0204CFFC (UnkStruct_0203E724 * param0)
 {
     int v0 = sub_0203A138(param0->unk_34->unk_1C->unk_00);
@@ -313,7 +315,7 @@ BOOL sub_0204D614 (UnkStruct_0203E724 * param0)
     v4 = GetMonData(v1, MON_DATA_FRIENDSHIP, NULL);
 
     if (v2 > 0) {
-        if (Item_GetAttribute(GetMonData(v1, MON_DATA_HELD_ITEM, NULL), 1, 11) == 53) {
+        if (Item_GetAttribute(GetMonData(v1, MON_DATA_HELD_ITEM, NULL), ITEM_DATA_HOLDEFFECT_ID, 11) == HOLD_EFFECT_SOOTHE_BELL) {
             v2 = v2 * 150 / 100;
         }
 

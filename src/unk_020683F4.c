@@ -68,6 +68,8 @@
 #include "overlay005/ov5_021F08CC.h"
 #include "overlay006/ov6_02247100.h"
 
+#include "constants/item.h"
+
 typedef void *(* UnkFuncPtr_02068870)(void *);
 
 typedef struct {
@@ -620,7 +622,7 @@ static void sub_02068ACC (UnkStruct_02068630 * param0, const UnkStruct_020684D0 
 
     v0 = sub_02050A60(param0->unk_00);
     v1 = sub_02050A64(param0->unk_00);
-    v2 = sub_0203D94C(v0, 3, sub_0207D2F0(param0->unk_04), 11);
+    v2 = sub_0203D94C(v0, 3, Item_GetMailIndexFromItemID(param0->unk_04), 11);
 
     v1->unk_260 = sub_0203C540(param0->unk_04, 3, 0);
     v1->unk_25C = v2;
@@ -1154,7 +1156,7 @@ BOOL sub_02069238 (UnkStruct_0203CDB0 * param0)
     }
 
     v3 = (u16)sub_0207D3FC(sub_0207D990(param0->unk_0C));
-    v4 = (u16)Item_GetAttribute(v3, 6, 11);
+    v4 = (u16)Item_GetAttribute(v3, ITEM_DATA_6, 11);
     v2 = (UnkFuncPtr_02069238)sub_020683F4(2, v4);
     v1 = (UnkFuncPtr_020EF79C)sub_020683F4(1, v4);
 

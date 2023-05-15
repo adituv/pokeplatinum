@@ -6,7 +6,7 @@
 #include "struct_defs/pokemon.h"
 #include "struct_decls/struct_party_decl.h"
 #include "struct_decls/struct_0207ADB4_decl.h"
-#include "struct_decls/struct_0207D3B0_decl.h"
+#include "struct_decls/plitemdata_decl.h"
 #include "struct_decls/struct_02098700_decl.h"
 #include "overlay016/struct_ov16_0224B9DC_decl.h"
 #include "overlay016/struct_ov16_0224B9DC_sub3_decl.h"
@@ -44,6 +44,8 @@
 #include "overlay016/ov16_0225177C.h"
 #include "overlay016/ov16_0225CBB8.h"
 #include "overlay016/ov16_0226485C.h"
+
+#include "constants/item.h"
 
 typedef struct {
     u16 unk_00;
@@ -6169,7 +6171,7 @@ BOOL ov16_02259B9C (UnkStruct_0207ADB4 * param0, UnkStruct_ov16_0224B9DC * param
         }
 
         if ((param1->unk_2D40[param1->unk_118].unk_00 == 493) && (param1->unk_2D40[param1->unk_118].unk_4C) && (ov16_02255A4C(param1, param1->unk_118) == 121)) {
-            v1 = sub_02077988(Item_GetAttribute(param1->unk_2D40[param1->unk_118].unk_78, 1, 5));
+            v1 = sub_02077988(Item_GetAttribute(param1->unk_2D40[param1->unk_118].unk_78, ITEM_DATA_HOLDEFFECT_ID, 5));
 
             if (param1->unk_2D40[param1->unk_118].unk_26_0 != v1) {
                 param1->unk_2D40[param1->unk_118].unk_26_0 = v1;
@@ -6968,7 +6970,7 @@ BOOL ov16_0225B0C0 (UnkStruct_ov16_0224B9DC * param0, u16 param1)
 
 s32 ov16_0225B0FC (UnkStruct_ov16_0224B9DC * param0, u16 param1, u16 param2)
 {
-    UnkStruct_0207D3B0 * v0;
+    PlItemData * v0;
     u16 v1;
 
     v1 = sub_0207CE78(param1, 0);

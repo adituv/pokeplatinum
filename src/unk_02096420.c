@@ -3,7 +3,7 @@
 
 #include "struct_defs/pokemon.h"
 #include "struct_decls/struct_party_decl.h"
-#include "struct_decls/struct_0207D3B0_decl.h"
+#include "struct_decls/plitemdata_decl.h"
 
 #include "heap.h"
 #include "unk_02073C2C.h"
@@ -12,57 +12,59 @@
 #include "item.h"
 #include "unk_02096420.h"
 
+#include "constants/item.h"
+
 static u8 sub_02096F34(Pokemon * param0, u32 param1);
 static u8 sub_02096F84(Pokemon * param0, u32 param1, u32 param2);
 static u8 sub_02097004(Pokemon * param0, u32 param1, u32 param2);
 static void sub_020970AC(Pokemon * param0, u32 param1, u32 param2, u32 param3);
 static s32 sub_020970EC(s32 param0, s32 param1, s32 param2);
 static u8 sub_020971D0(Pokemon * param0, s32 param1, s32 param2, u16 param3, u32 param4);
-static u8 sub_02097144(Pokemon * param0, UnkStruct_0207D3B0 * param1);
+static u8 sub_02097144(Pokemon * param0, PlItemData * param1);
 
 u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
 {
-    UnkStruct_0207D3B0 * v0;
+    PlItemData * v0;
     s32 v1[8];
 
     v0 = Item_LoadDataOrGFX(param1, 0, param3);
 
-    if (Item_GetAttributeFromStruct(v0, 14) != 1) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HASEXTRADATA) != 1) {
         Heap_FreeToHeap(v0);
         return 0;
     }
 
     v1[0] = GetMonData(param0, MON_DATA_160, NULL);
 
-    if (Item_GetAttributeFromStruct(v0, 15) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_SLEEP) != 0) {
         if ((v1[0] & 0x7) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 16) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_POISON) != 0) {
         if ((v1[0] & (0x8 | 0x80)) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 17) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_BURN) != 0) {
         if ((v1[0] & 0x10) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 18) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_FREEZE) != 0) {
         if ((v1[0] & 0x20) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 19) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURSE_PARALYSIS) != 0) {
         if ((v1[0] & 0x40) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
@@ -71,47 +73,47 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
 
     v1[0] = GetMonData(param0, MON_DATA_163, NULL);
 
-    if (((Item_GetAttributeFromStruct(v0, 23) != 0) || (Item_GetAttributeFromStruct(v0, 24) != 0)) && (Item_GetAttributeFromStruct(v0, 25) == 0)) {
+    if (((Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_REVIVE_EFFECT) != 0) || (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_SACREDASH_EFFECT) != 0)) && (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_RARECANDY_EFFECT) == 0)) {
         if (v1[0] == 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
-    } else if (Item_GetAttributeFromStruct(v0, 38) != 0) {
+    } else if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_HP) != 0) {
         if ((v1[0] != 0) && (v1[0] < GetMonData(param0, MON_DATA_164, NULL))) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 25) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_RARECANDY_EFFECT) != 0) {
         if (GetMonData(param0, MON_DATA_161, NULL) < 100) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 26) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_EVOLUTION_EFFECT) != 0) {
         if (sub_02076B94(NULL, param0, 3, param1, NULL) != 0) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if ((Item_GetAttributeFromStruct(v0, 34) != 0) || (Item_GetAttributeFromStruct(v0, 35) != 0)) {
+    if ((Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPUP_EFFECT) != 0) || (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPMAX_EFFECT) != 0)) {
         if ((GetMonData(param0, MON_DATA_62 + param2, NULL) < 3) && (MoveTable_GetMoveMaxPP(GetMonData(param0, MON_DATA_MOVE1 + param2, NULL), 0) >= 5)) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 36) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_SINGLE) != 0) {
         if (sub_02096F34(param0, param2) == 1) {
             Heap_FreeToHeap(v0);
             return 1;
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 37) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_ALL) != 0) {
         for (v1[0] = 0; v1[0] < 4; v1[0]++) {
             if (sub_02096F34(param0, v1[0]) == 1) {
                 Heap_FreeToHeap(v0);
@@ -128,8 +130,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
     v1[5] = GetMonData(param0, MON_DATA_SPDEF_EV, NULL);
 
     if (GetMonData(param0, MON_DATA_SPECIES, NULL) != 292) {
-        if (Item_GetAttributeFromStruct(v0, 39) != 0) {
-            v1[6] = Item_GetAttributeFromStruct(v0, 48);
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_HP_EVS) != 0) {
+            v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_HP_EV);
 
             if (v1[6] > 0) {
                 if ((v1[0] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -150,8 +152,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 40) != 0) {
-        v1[6] = Item_GetAttributeFromStruct(v0, 49);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_ATK_EVS) != 0) {
+        v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_ATK_EV);
 
         if (v1[6] > 0) {
             if ((v1[1] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -171,8 +173,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 41) != 0) {
-        v1[6] = Item_GetAttributeFromStruct(v0, 50);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_DEF_EVS) != 0) {
+        v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_DEF_EV);
 
         if (v1[6] > 0) {
             if ((v1[2] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -192,8 +194,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 42) != 0) {
-        v1[6] = Item_GetAttributeFromStruct(v0, 51);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPE_EVS) != 0) {
+        v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPE_EV);
 
         if (v1[6] > 0) {
             if ((v1[3] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -213,8 +215,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 43) != 0) {
-        v1[6] = Item_GetAttributeFromStruct(v0, 52);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPA_EVS) != 0) {
+        v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPA_EV);
 
         if (v1[6] > 0) {
             if ((v1[4] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -234,8 +236,8 @@ u8 sub_02096420 (Pokemon * param0, u16 param1, u16 param2, u32 param3)
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 44) != 0) {
-        v1[6] = Item_GetAttributeFromStruct(v0, 53);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPD_EVS) != 0) {
+        v1[6] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPD_EV);
 
         if (v1[6] > 0) {
             if ((v1[5] < 100) && ((v1[0] + v1[1] + v1[2] + v1[3] + v1[4] + v1[5]) < 510)) {
@@ -268,14 +270,14 @@ u8 sub_0209693C (Party * param0, u16 param1, u8 param2, u8 param3, u32 param4)
 
 u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param4)
 {
-    UnkStruct_0207D3B0 * v0;
+    PlItemData * v0;
     s32 v1[8];
     u8 v2;
     u8 v3;
 
     v0 = Item_LoadDataOrGFX(param1, 0, param4);
 
-    if (Item_GetAttributeFromStruct(v0, 14) != 1) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HASEXTRADATA) != 1) {
         Heap_FreeToHeap(v0);
         return 0;
     }
@@ -286,27 +288,27 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
     v1[0] = GetMonData(param0, MON_DATA_160, NULL);
     v1[1] = v1[0];
 
-    if (Item_GetAttributeFromStruct(v0, 15) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_SLEEP) != 0) {
         v1[1] &= (0x7 ^ 0xffffffff);
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 16) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_POISON) != 0) {
         v1[1] &= ((0x8 | 0x80 | 0xf00) ^ 0xffffffff);
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 17) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_BURN) != 0) {
         v1[1] &= (0x10 ^ 0xffffffff);
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 18) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURES_FREEZE) != 0) {
         v1[1] &= (0x20 ^ 0xffffffff);
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 19) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_CURSE_PARALYSIS) != 0) {
         v1[1] &= (0x40 ^ 0xffffffff);
         v3 = 1;
     }
@@ -319,16 +321,16 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
     v1[0] = GetMonData(param0, MON_DATA_163, NULL);
     v1[1] = GetMonData(param0, MON_DATA_164, NULL);
 
-    if (((Item_GetAttributeFromStruct(v0, 23) != 0) || (Item_GetAttributeFromStruct(v0, 24) != 0)) && (Item_GetAttributeFromStruct(v0, 25) != 0)) {
+    if (((Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_REVIVE_EFFECT) != 0) || (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_SACREDASH_EFFECT) != 0)) && (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_RARECANDY_EFFECT) != 0)) {
         if (v1[0] == 0) {
-            sub_020970AC(param0, v1[0], v1[1], Item_GetAttributeFromStruct(v0, 54));
+            sub_020970AC(param0, v1[0], v1[1], Item_GetAttributeFromStruct(v0, ITEM_DATA_AMT_HP_RESTORED));
             v2 = 1;
         }
 
         v3 = 1;
-    } else if (Item_GetAttributeFromStruct(v0, 38) != 0) {
+    } else if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_HP) != 0) {
         if (v1[0] < v1[1]) {
-            sub_020970AC(param0, v1[0], v1[1], Item_GetAttributeFromStruct(v0, 54));
+            sub_020970AC(param0, v1[0], v1[1], Item_GetAttributeFromStruct(v0, ITEM_DATA_AMT_HP_RESTORED));
             v2 = 1;
         }
 
@@ -337,7 +339,7 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
 
     v1[2] = GetMonData(param0, MON_DATA_161, NULL);
 
-    if (Item_GetAttributeFromStruct(v0, 25) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_RARECANDY_EFFECT) != 0) {
         if (v1[2] < 100) {
             sub_0207536C(param0, MON_DATA_EXP, sub_02075A70(param0));
             sub_0207418C(param0);
@@ -353,17 +355,17 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 26) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_EVOLUTION_EFFECT) != 0) {
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 34) != 0) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPUP_EFFECT) != 0) {
         if (sub_02097004(param0, param2, 1) == 1) {
             v2 = 1;
         }
 
         v3 = 1;
-    } else if (Item_GetAttributeFromStruct(v0, 35) != 0) {
+    } else if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPMAX_EFFECT) != 0) {
         if (sub_02097004(param0, param2, 3) == 1) {
             v2 = 1;
         }
@@ -371,15 +373,15 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         v3 = 1;
     }
 
-    if (Item_GetAttributeFromStruct(v0, 36) != 0) {
-        if (sub_02096F84(param0, param2, Item_GetAttributeFromStruct(v0, 55)) == 1) {
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_SINGLE) != 0) {
+        if (sub_02096F84(param0, param2, Item_GetAttributeFromStruct(v0, ITEM_DATA_AMT_PP_RESTORED)) == 1) {
             v2 = 1;
         }
 
         v3 = 1;
-    } else if (Item_GetAttributeFromStruct(v0, 37) != 0) {
+    } else if (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_ALL) != 0) {
         for (v1[0] = 0; v1[0] < 4; v1[0]++) {
-            if (sub_02096F84(param0, v1[0], Item_GetAttributeFromStruct(v0, 55)) == 1) {
+            if (sub_02096F84(param0, v1[0], Item_GetAttributeFromStruct(v0, ITEM_DATA_AMT_PP_RESTORED)) == 1) {
                 v2 = 1;
             }
         }
@@ -395,8 +397,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
     v1[5] = GetMonData(param0, MON_DATA_SPDEF_EV, NULL);
 
     if (GetMonData(param0, MON_DATA_SPECIES, NULL) != 292) {
-        if (Item_GetAttributeFromStruct(v0, 39) != 0) {
-            v1[7] = Item_GetAttributeFromStruct(v0, 48);
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_HP_EVS) != 0) {
+            v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_HP_EV);
             v1[6] = sub_020970EC(v1[0], (v1[1] + v1[2] + v1[3] + v1[4] + v1[5]), v1[7]);
 
             if (v1[6] != -1) {
@@ -412,8 +414,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 40) != 0) {
-        v1[7] = Item_GetAttributeFromStruct(v0, 49);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_ATK_EVS) != 0) {
+        v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_ATK_EV);
         v1[6] = sub_020970EC(v1[1], (v1[0] + v1[2] + v1[3] + v1[4] + v1[5]), v1[7]);
 
         if (v1[6] != -1) {
@@ -428,8 +430,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 41) != 0) {
-        v1[7] = Item_GetAttributeFromStruct(v0, 50);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_DEF_EVS) != 0) {
+        v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_DEF_EV);
         v1[6] = sub_020970EC(v1[2], (v1[0] + v1[1] + v1[3] + v1[4] + v1[5]), v1[7]);
 
         if (v1[6] != -1) {
@@ -444,8 +446,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 42) != 0) {
-        v1[7] = Item_GetAttributeFromStruct(v0, 51);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPE_EVS) != 0) {
+        v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPE_EV);
         v1[6] = sub_020970EC(v1[3], (v1[0] + v1[1] + v1[2] + v1[4] + v1[5]), v1[7]);
 
         if (v1[6] != -1) {
@@ -460,8 +462,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 43) != 0) {
-        v1[7] = Item_GetAttributeFromStruct(v0, 52);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPA_EVS) != 0) {
+        v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPA_EV);
         v1[6] = sub_020970EC(v1[4], (v1[0] + v1[1] + v1[2] + v1[3] + v1[5]), v1[7]);
 
         if (v1[6] != -1) {
@@ -476,8 +478,8 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
         }
     }
 
-    if (Item_GetAttributeFromStruct(v0, 44) != 0) {
-        v1[7] = Item_GetAttributeFromStruct(v0, 53);
+    if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_SPD_EVS) != 0) {
+        v1[7] = Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_SPD_EV);
         v1[6] = sub_020970EC(v1[5], (v1[0] + v1[1] + v1[2] + v1[3] + v1[4]), v1[7]);
 
         if (v1[6] != -1) {
@@ -500,22 +502,22 @@ u8 sub_02096954 (Pokemon * param0, u16 param1, u16 param2, u16 param3, u32 param
     v1[0] = GetMonData(param0, MON_DATA_FRIENDSHIP, NULL);
 
     if (v1[0] < 100) {
-        if (Item_GetAttributeFromStruct(v0, 45) != 0) {
-            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, 56), param3, param4) == 0) {
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_FRIENDSHIP_LOW) != 0) {
+            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_FRIENDSHIP_LOW), param3, param4) == 0) {
                 Heap_FreeToHeap(v0);
                 return v2;
             }
         }
     } else if ((v1[0] >= 100) && (v1[0] < 200)) {
-        if (Item_GetAttributeFromStruct(v0, 46) != 0) {
-            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, 57), param3, param4) == 0) {
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_FRIENDSHIP_MID) != 0) {
+            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_FRIENDSHIP_MID), param3, param4) == 0) {
                 Heap_FreeToHeap(v0);
                 return v2;
             }
         }
     } else if ((v1[0] >= 200) && (v1[0] <= 255)) {
-        if (Item_GetAttributeFromStruct(v0, 47) != 0) {
-            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, 58), param3, param4) == 0) {
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_AFFECTS_FRIENDSHIP_HIGH) != 0) {
+            if (sub_020971D0(param0, v1[0], Item_GetAttributeFromStruct(v0, ITEM_DATA_DELTA_FRIENDSHIP_HIGH), param3, param4) == 0) {
                 Heap_FreeToHeap(v0);
                 return v2;
             }
@@ -674,7 +676,7 @@ static s32 sub_020970EC (s32 param0, s32 param1, s32 param2)
     return param0;
 }
 
-static u8 sub_02097144 (Pokemon * param0, UnkStruct_0207D3B0 * param1)
+static u8 sub_02097144 (Pokemon * param0, PlItemData * param1)
 {
     s32 v0;
     s32 v1;
@@ -686,24 +688,24 @@ static u8 sub_02097144 (Pokemon * param0, UnkStruct_0207D3B0 * param1)
     }
 
     if (v0 < 100) {
-        if (Item_GetAttributeFromStruct(param1, 45) != 0) {
-            if (Item_GetAttributeFromStruct(param1, 56) > 0) {
+        if (Item_GetAttributeFromStruct(param1, ITEM_DATA_AFFECTS_FRIENDSHIP_LOW) != 0) {
+            if (Item_GetAttributeFromStruct(param1, ITEM_DATA_DELTA_FRIENDSHIP_LOW) > 0) {
                 return 1;
             }
         }
 
         return 0;
     } else if ((v0 >= 100) && (v0 < 200)) {
-        if (Item_GetAttributeFromStruct(param1, 46) != 0) {
-            if (Item_GetAttributeFromStruct(param1, 57) > 0) {
+        if (Item_GetAttributeFromStruct(param1, ITEM_DATA_AFFECTS_FRIENDSHIP_MID) != 0) {
+            if (Item_GetAttributeFromStruct(param1, ITEM_DATA_DELTA_FRIENDSHIP_MID) > 0) {
                 return 1;
             }
         }
 
         return 0;
     } else if ((v0 >= 200) && (v0 < 255)) {
-        if (Item_GetAttributeFromStruct(param1, 47) != 0) {
-            if (Item_GetAttributeFromStruct(param1, 58) > 0) {
+        if (Item_GetAttributeFromStruct(param1, ITEM_DATA_AFFECTS_FRIENDSHIP_HIGH) != 0) {
+            if (Item_GetAttributeFromStruct(param1, ITEM_DATA_DELTA_FRIENDSHIP_HIGH) > 0) {
                 return 1;
             }
         }
@@ -725,7 +727,7 @@ static u8 sub_020971D0 (Pokemon * param0, s32 param1, s32 param2, u16 param3, u3
     }
 
     if (param2 > 0) {
-        if (Item_GetAttribute(GetMonData(param0, MON_DATA_HELD_ITEM, NULL), 1, param4) == 53) {
+        if (Item_GetAttribute(GetMonData(param0, MON_DATA_HELD_ITEM, NULL), ITEM_DATA_HOLDEFFECT_ID, param4) == HOLD_EFFECT_SOOTHE_BELL) {
             param2 = param2 * 150 / 100;
         }
 

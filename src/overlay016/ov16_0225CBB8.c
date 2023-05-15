@@ -153,6 +153,8 @@
 #include "overlay016/ov16_0226871C.h"
 #include "overlay016/ov16_0226D094.h"
 
+#include "constants/item.h"
+
 void ov16_0225CBB8(UnkStruct_0207ADB4 * param0, UnkStruct_ov16_0225BFFC * param1);
 void ov16_0225CBDC(UnkStruct_0207ADB4 * param0, UnkStruct_ov16_0225BFFC * param1, UnkStruct_ov16_0225C168 * param2);
 void ov16_0225CE1C(UnkStruct_0207ADB4 * param0, UnkStruct_ov16_0225BFFC * param1, UnkStruct_ov16_0225C17C * param2);
@@ -3800,7 +3802,7 @@ static void ov16_022611DC (UnkStruct_0201CD38 * param0, void * param1)
                     }
                     break;
                 case 0:
-                    if ((((v0->unk_08->unk_04->unk_11 < 2) && ((ov16_0223DF0C(v0->unk_00) == (0x2 | 0x1)) || (ov16_0223DF0C(v0->unk_00) == ((0x2 | 0x1) | 0x10)))) || (v0->unk_08->unk_04->unk_11 < 1)) && (Item_GetAttribute(v0->unk_04->unk_1C, 38, 5))) {
+                    if ((((v0->unk_08->unk_04->unk_11 < 2) && ((ov16_0223DF0C(v0->unk_00) == (0x2 | 0x1)) || (ov16_0223DF0C(v0->unk_00) == ((0x2 | 0x1) | 0x10)))) || (v0->unk_08->unk_04->unk_11 < 1)) && (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_RESTORES_HP, 5))) {
                         if (ov16_0223EDAC(v0->unk_00) == 1) {
                             v0->unk_12 = 17;
                         } else {
@@ -4081,37 +4083,37 @@ static void ov16_022611DC (UnkStruct_0201CD38 * param0, void * param1)
         v30.unk_01 = 2;
         v30.unk_04[0] = v28 | (v0->unk_08->unk_0C[v28] << 8);
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 15, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_SLEEP, 5)) {
             v31 = 0;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 16, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_POISON, 5)) {
             v31 = 1;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 17, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_BURN, 5)) {
             v31 = 2;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 18, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_FREEZE, 5)) {
             v31 = 3;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 19, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURSE_PARALYSIS, 5)) {
             v31 = 4;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 20, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_CONFUSION, 5)) {
             v31 = 5;
             v32++;
         }
 
-        if (Item_GetAttribute(v0->unk_04->unk_1C, 21, 5)) {
+        if (Item_GetAttribute(v0->unk_04->unk_1C, ITEM_DATA_CURES_INFATUATION, 5)) {
             v31 = 6;
             v32++;
         }

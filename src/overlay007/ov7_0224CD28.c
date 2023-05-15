@@ -69,6 +69,8 @@
 #include "overlay005/ov5_021D2F14.h"
 #include "overlay007/ov7_0224CD28.h"
 
+#include "constants/item.h"
+
 static u8 ov7_0224CE90(UnkStruct_0203CDB0 * param0);
 static u8 ov7_0224D250(UnkStruct_0203CDB0 * param0, UnkStruct_ov7_0224D008 * param1);
 static void ov7_0224D008(UnkStruct_ov7_0224D008 * param0);
@@ -1137,7 +1139,7 @@ static u8 ov7_0224E3D8 (UnkStruct_ov7_0224D008 * param0)
                 sub_0200B77C(param0->unk_8C, 0, param0->unk_2AA);
             }
 
-            sub_0200B7B4(param0->unk_8C, 1, Item_GetAttribute(param0->unk_2AA, 5, 11));
+            sub_0200B7B4(param0->unk_8C, 1, Item_GetAttribute(param0->unk_2AA, ITEM_DATA_POCKET, 11));
         } else if (param0->unk_2A9 == 3) {
             if (param0->unk_2AC == 1) {
                 sub_0200B70C(param0->unk_8C, 0, param0->unk_2AA);
@@ -1146,7 +1148,7 @@ static u8 ov7_0224E3D8 (UnkStruct_ov7_0224D008 * param0)
             }
 
             v0 = sub_0200B1EC(param0->unk_88, 6);
-            sub_0200B7B4(param0->unk_8C, 1, Item_GetAttribute(param0->unk_2AA, 5, 11));
+            sub_0200B7B4(param0->unk_8C, 1, Item_GetAttribute(param0->unk_2AA, ITEM_DATA_POCKET, 11));
         } else {
             if (param0->unk_2A9 == 1) {
                 ov7_0224E834(param0, param0->unk_2AA, 0);
@@ -1299,7 +1301,7 @@ static void ov7_0224E834 (UnkStruct_ov7_0224D008 * param0, u16 param1, u16 param
 static u32 ov7_0224E890 (UnkStruct_ov7_0224D008 * param0, u16 param1)
 {
     if (param0->unk_2A9 == 0) {
-        return Item_GetAttribute(param1, 0, 11);
+        return Item_GetAttribute(param1, ITEM_DATA_PRICE, 11);
     } else if (param0->unk_2A9 == 3) {
         return ov7_0224E8CC(param0, param1);
     } else if (param0->unk_2A9 == 1) {

@@ -73,6 +73,8 @@
 #include "overlay016/ov16_0226871C.h"
 #include "overlay016/ov16_0226E148.h"
 
+#include "constants/item.h"
+
 UnkStruct_02018340 * ov16_0223DF00(UnkStruct_0207ADB4 * param0);
 UnkStruct_0205AA50 * ov16_0223DF04(UnkStruct_0207ADB4 * param0, int param1);
 u32 ov16_0223DF0C(UnkStruct_0207ADB4 * param0);
@@ -588,7 +590,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
     v1 = ov16_0223DFAC(param0, param1, param2);
     v6 = 0;
 
-    if (Item_GetAttribute(param4, 15, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_SLEEP, 5)) {
         v3 = GetMonData(v1, MON_DATA_160, NULL);
 
         if (v3 & 0x7) {
@@ -608,7 +610,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 16, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_POISON, 5)) {
         v3 = GetMonData(v1, MON_DATA_160, NULL);
 
         if (v3 & 0xf88) {
@@ -625,7 +627,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 17, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_BURN, 5)) {
         v3 = GetMonData(v1, MON_DATA_160, NULL);
 
         if (v3 & 0x10) {
@@ -642,7 +644,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 18, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_FREEZE, 5)) {
         v3 = GetMonData(v1, MON_DATA_160, NULL);
 
         if (v3 & 0x20) {
@@ -659,7 +661,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 19, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURSE_PARALYSIS, 5)) {
         v3 = GetMonData(v1, MON_DATA_160, NULL);
 
         if (v3 & 0x40) {
@@ -676,7 +678,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 20, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_CONFUSION, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             v3 = ov16_02252060(v0, param1, 53, NULL);
 
@@ -688,7 +690,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 21, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_CURES_INFATUATION, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             v3 = ov16_02252060(v0, param1, 53, NULL);
 
@@ -700,7 +702,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 22, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_GUARDSPEC_EFFECT, 5)) {
         v3 = ov16_0225B45C(param0, v0, 1, param1);
 
         if (v3 == 0) {
@@ -712,7 +714,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 27, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XATTACK_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 19, NULL) < 12) {
                 ov16_02252A14(v0, param1, 19, 1);
@@ -721,7 +723,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 28, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XDEFEND_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 20, NULL) < 12) {
                 ov16_02252A14(v0, param1, 20, 1);
@@ -730,7 +732,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 29, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XSPECIAL_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 22, NULL) < 12) {
                 ov16_02252A14(v0, param1, 22, 1);
@@ -739,7 +741,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 30, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XSPDEF_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 23, NULL) < 12) {
                 ov16_02252A14(v0, param1, 23, 1);
@@ -748,7 +750,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 31, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XSPEED_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 21, NULL) < 12) {
                 ov16_02252A14(v0, param1, 21, 1);
@@ -757,7 +759,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 32, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_XACCURACY_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             if (ov16_02252060(v0, param1, 24, NULL) < 12) {
                 ov16_02252A14(v0, param1, 24, 1);
@@ -766,7 +768,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 33, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_HAS_DIREHIT_EFFECT, 5)) {
         if ((v4 == param2) || (v5 == param2)) {
             v3 = ov16_02252060(v0, param1, 53, NULL);
 
@@ -778,8 +780,8 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 36, 5)) {
-        v3 = Item_GetAttribute(param4, 55, 5);
+    if (Item_GetAttribute(param4, ITEM_DATA_RESTORES_PP_SINGLE, 5)) {
+        v3 = Item_GetAttribute(param4, ITEM_DATA_AMT_PP_RESTORED, 5);
 
         if (GetMonData(v1, MON_DATA_58 + param3, NULL) != GetMonData(v1, MON_DATA_66 + param3, NULL)) {
             sub_0207536C(v1, MON_DATA_58 + param3, v3);
@@ -794,8 +796,8 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 37, 5)) {
-        v3 = Item_GetAttribute(param4, 55, 5);
+    if (Item_GetAttribute(param4, ITEM_DATA_RESTORES_PP_ALL, 5)) {
+        v3 = Item_GetAttribute(param4, ITEM_DATA_AMT_PP_RESTORED, 5);
 
         for (param3 = 0; param3 < 4; param3++) {
             if (GetMonData(v1, MON_DATA_58 + param3, NULL) != GetMonData(v1, MON_DATA_66 + param3, NULL)) {
@@ -812,10 +814,10 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 38, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_RESTORES_HP, 5)) {
         v3 = 0;
 
-        if (Item_GetAttribute(param4, 23, 5)) {
+        if (Item_GetAttribute(param4, ITEM_DATA_HAS_REVIVE_EFFECT, 5)) {
             if (GetMonData(v1, MON_DATA_163, NULL) == 0) {
                 v3 = 1;
             }
@@ -850,7 +852,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
 
             sub_0207536C(v1, MON_DATA_163, v3);
 
-            if (!Item_GetAttribute(param4, 23, 5)) {
+            if (!Item_GetAttribute(param4, ITEM_DATA_HAS_REVIVE_EFFECT, 5)) {
                 if (ov16_0223E208(param0, param1)) {
                     ov16_022523E8(v0, param1, 95, &v3);
                 } else {
@@ -864,21 +866,21 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
         }
     }
 
-    if (Item_GetAttribute(param4, 45, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_AFFECTS_FRIENDSHIP_LOW, 5)) {
         if ((GetMonData(v1, MON_DATA_FRIENDSHIP, NULL) < 100) && (v2 == 1)) {
-            v6 = Item_GetAttribute(param4, 56, 5);
+            v6 = Item_GetAttribute(param4, ITEM_DATA_DELTA_FRIENDSHIP_LOW, 5);
         }
     }
 
-    if (Item_GetAttribute(param4, 46, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_AFFECTS_FRIENDSHIP_MID, 5)) {
         if ((GetMonData(v1, MON_DATA_FRIENDSHIP, NULL) >= 100) && (GetMonData(v1, MON_DATA_FRIENDSHIP, NULL) < 200) && (v2 == 1)) {
-            v6 = Item_GetAttribute(param4, 57, 5);
+            v6 = Item_GetAttribute(param4, ITEM_DATA_DELTA_FRIENDSHIP_MID, 5);
         }
     }
 
-    if (Item_GetAttribute(param4, 47, 5)) {
+    if (Item_GetAttribute(param4, ITEM_DATA_AFFECTS_FRIENDSHIP_HIGH, 5)) {
         if ((GetMonData(v1, MON_DATA_FRIENDSHIP, NULL) >= 200) && (v2 == 1)) {
-            v6 = Item_GetAttribute(param4, 58, 5);
+            v6 = Item_GetAttribute(param4, ITEM_DATA_DELTA_FRIENDSHIP_HIGH, 5);
         }
     }
 
@@ -894,7 +896,7 @@ BOOL ov16_0223E30C (UnkStruct_0207ADB4 * param0, int param1, int param2, int par
 
             v3 = GetMonData(v1, MON_DATA_HELD_ITEM, NULL);
 
-            if (Item_GetAttribute(param4, 1, 5) == 53) {
+            if (Item_GetAttribute(param4, ITEM_DATA_HOLDEFFECT_ID, 5) == HOLD_EFFECT_SOOTHE_BELL) {
                 v6 = v6 * 150 / 100;
             }
         }

@@ -53,6 +53,8 @@
 #include "overlay016/ov16_0225177C.h"
 #include "overlay016/ov16_0226DE44.h"
 
+#include "constants/item.h"
+
 static void ov13_02226590(UnkStruct_0201CD38 * param0, void * param1);
 static u8 ov13_0222668C(UnkStruct_ov13_02227244 * param0);
 static u8 ov13_02226760(UnkStruct_ov13_02227244 * param0);
@@ -406,7 +408,7 @@ static u8 ov13_02226A5C (UnkStruct_ov13_02227244 * param0)
 
     if (param0->unk_114D == 3) {
         int v1 = ov13_02227244(param0);
-        u32 v2 = Item_GetAttribute(v0->unk_1C, 7, v0->unk_0C);
+        u32 v2 = Item_GetAttribute(v0->unk_1C, ITEM_DATA_7, v0->unk_0C);
 
         if ((v0->unk_18 != 0) && (v0->unk_1C != 55) && (v2 != 3)) {
             Pokemon * v3;

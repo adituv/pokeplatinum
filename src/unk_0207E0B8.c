@@ -8,7 +8,7 @@
 #include "struct_decls/struct_02018340_decl.h"
 #include "struct_decls/struct_02023790_decl.h"
 #include "struct_defs/pokemon.h"
-#include "struct_decls/struct_0207D3B0_decl.h"
+#include "struct_decls/plitemdata_decl.h"
 
 #include "constdata/const_020F1E88.h"
 
@@ -71,6 +71,8 @@
 #include "unk_0208C324.h"
 #include "unk_02096420.h"
 #include "overlay118/ov118_021D0D80.h"
+
+#include "constants/item.h"
 
 FS_EXTERN_OVERLAY(overlay118);
 
@@ -2581,7 +2583,7 @@ static u8 sub_02080FD0 (UnkStruct_0207F248 * param0)
 
 static int sub_0208107C (UnkStruct_0207F248 * param0)
 {
-    UnkStruct_0207D3B0 * v0;
+    PlItemData * v0;
 
     v0 = Item_LoadDataOrGFX(param0->unk_5A4->unk_24, 0, 12);
 
@@ -2592,13 +2594,13 @@ static int sub_0208107C (UnkStruct_0207F248 * param0)
         return 31;
     }
 
-    if ((Item_GetAttributeFromStruct(v0, 34) != 0) || (Item_GetAttributeFromStruct(v0, 35) != 0)) {
+    if ((Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPUP_EFFECT) != 0) || (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_PPMAX_EFFECT) != 0)) {
         Heap_FreeToHeap(v0);
         sub_020866A0(param0, 0);
         return 6;
     }
 
-    if ((Item_GetAttributeFromStruct(v0, 36) != 0) && (Item_GetAttributeFromStruct(v0, 37) == 0)) {
+    if ((Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_SINGLE) != 0) && (Item_GetAttributeFromStruct(v0, ITEM_DATA_RESTORES_PP_ALL) == 0)) {
         Heap_FreeToHeap(v0);
         sub_020866A0(param0, 1);
         return 6;
@@ -2607,7 +2609,7 @@ static int sub_0208107C (UnkStruct_0207F248 * param0)
     if (sub_0209693C(param0->unk_5A4->unk_00, param0->unk_5A4->unk_24, param0->unk_B11, 0, 12) == 1) {
         sub_0207D60C(param0->unk_5A4->unk_04, param0->unk_5A4->unk_24, 1, 12);
 
-        if (Item_GetAttributeFromStruct(v0, 26) != 0) {
+        if (Item_GetAttributeFromStruct(v0, ITEM_DATA_HAS_EVOLUTION_EFFECT) != 0) {
             Pokemon * v1 = Party_GetPokemonBySlotIndex(param0->unk_5A4->unk_00, param0->unk_B11);
 
             param0->unk_5A4->unk_38 = sub_02076B94(NULL, v1, 3, param0->unk_5A4->unk_24, &param0->unk_5A4->unk_3C);

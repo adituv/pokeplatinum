@@ -1250,7 +1250,7 @@ static void ov97_02234B0C (UnkStruct_ov97_02234A2C * param0, BoxPokemonGBA * par
     v2 = GetGBABoxMonData(param1, 12, NULL);
 
     if (v2) {
-        v3 = sub_0207CF10(v2);
+        v3 = Item_GetItemIDFromGen3ID(v2);
         v8 = sub_02023790(64, 78);
 
         Item_GetNameIntoString(v8, v3, 78);

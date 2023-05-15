@@ -90,6 +90,8 @@
 #include "overlay016/ov16_02268520.h"
 #include "overlay021/ov21_021E8D48.h"
 
+#include "constants/item.h"
+
 typedef BOOL (* UnkFuncPtr_ov16_0226E72C)(UnkStruct_0207ADB4 *, UnkStruct_ov16_0224B9DC *);
 
 BOOL ov16_022405FC(UnkStruct_0207ADB4 * param0, UnkStruct_ov16_0224B9DC * param1);
@@ -7664,9 +7666,9 @@ static void ov16_02248E74 (UnkStruct_0201CD38 * param0, void * param1)
     for (v1 = v2->unk_30[6]; v1 < ov16_0223DF60(v2->unk_00, v6); v1++) {
         v3 = ov16_0223DFAC(v2->unk_00, v6, v1);
         v9 = GetMonData(v3, MON_DATA_HELD_ITEM, NULL);
-        v10 = Item_GetAttribute(v9, 1, 5);
+        v10 = Item_GetAttribute(v9, ITEM_DATA_HOLDEFFECT_ID, 5);
 
-        if ((v10 == 51) || (v2->unk_04->unk_A4[v5] & sub_020787CC(v1))) {
+        if ((v10 == HOLD_EFFECT_EXP_SHARE) || (v2->unk_04->unk_A4[v5] & sub_020787CC(v1))) {
             break;
         }
     }
@@ -7686,7 +7688,7 @@ static void ov16_02248E74 (UnkStruct_0201CD38 * param0, void * param1)
         u32 v12;
 
         v9 = GetMonData(v3, MON_DATA_HELD_ITEM, NULL);
-        v10 = Item_GetAttribute(v9, 1, 5);
+        v10 = Item_GetAttribute(v9, ITEM_DATA_HOLDEFFECT_ID, 5);
 
         if (((v8 & 0x1) == 0) && ((v2->unk_04->unk_2D40[1].unk_4C + v2->unk_04->unk_2D40[3].unk_4C) == 0) && (GetMonData(v3, MON_DATA_163, NULL)) && (v2->unk_04->unk_3144 == 0)) {
             sub_0200549C(1127);
@@ -7702,11 +7704,11 @@ static void ov16_02248E74 (UnkStruct_0201CD38 * param0, void * param1)
                 v11 = v2->unk_04->unk_9C;
             }
 
-            if (v10 == 51) {
+            if (v10 == HOLD_EFFECT_EXP_SHARE) {
                 v11 += v2->unk_04->unk_A0;
             }
 
-            if (v10 == 66) {
+            if (v10 == HOLD_EFFECT_LUCKY_EGG) {
                 v11 = v11 * 150 / 100;
             }
 
@@ -8125,8 +8127,8 @@ static void ov16_022499C0 (Party * param0, int param1, int param2, int param3)
     v8 = sub_02075874(param2, param3, 5);
     v7 = Party_GetPokemonBySlotIndex(param0, param1);
     v4 = GetMonData(v7, MON_DATA_HELD_ITEM, NULL);
-    v5 = Item_GetAttribute(v4, 1, 5);
-    v6 = Item_GetAttribute(v4, 2, 5);
+    v5 = Item_GetAttribute(v4, ITEM_DATA_HOLDEFFECT_ID, 5);
+    v6 = Item_GetAttribute(v4, ITEM_DATA_2, 5);
     v3 = 0;
 
     for (v0 = 0; v0 < 6; v0++) {
